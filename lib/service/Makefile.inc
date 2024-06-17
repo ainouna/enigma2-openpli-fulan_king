@@ -31,6 +31,11 @@ serviceinclude_HEADERS = \
 	service/servicets.h \
 	service/servicewebts.h
 
+if HAVE_LIBEPLAYER3
+service_libenigma_service_a_SOURCES += \
+       service/serviceeplayer3.cpp
+endif
+
 if HAVE_LIBXINE
 service_libenigma_service_a_SOURCES += \
 	service/servicexine.cpp
