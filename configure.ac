@@ -73,14 +73,14 @@ if test "$enable_spark7162" = "yes"; then
 fi
 	
 
-AC_ARG_ENABLE(libeplayer3,
-	[  --enable-libeplayer3          enable TDT libeplayer3 as player engine supportt],
-	[AC_DEFINE(ENABLE_LIBEPLAYER3,1,[enable TDT libeplayer3 as player engine support])])
-
-AM_CONDITIONAL(ENABLE_LIBEPLAYER3,test "$enable_libeplayer3" = "yes")
-if test "$enable_libeplayer3" = "yes"; then
-	AC_DEFINE(ENABLE_LIBEPLAYER3,1,[include TDT libeplayer3 as player engine support])
+AC_ARG_WITH(libeplayer3,
+	AS_HELP_STRING([--with-libeplayer3],[use libeplayer3 as player engine support, yes or no]),
+	[with_libeplayer3=$withval],[with_libeplayer3=no])
+if test "$with_libeplayer3" = "yes"; then
+	PKG_CHECK_MODULES(LIBXINE, libeplayer3)
+	AC_DEFINE([HAVE_LIBEPLAYER3],[1],[Define to 1 if you have libeplayer3])
 fi
+AM_CONDITIONAL(HAVE_LIBEPLAYER3, test "$with_libeplayer3" = "yes")
 
 AC_ARG_ENABLE(mediafwgstreamer,
 	[  --enable-mediafwgstreamer      enable gstreamer as player engine supportt],
